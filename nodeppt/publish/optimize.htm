@@ -1,0 +1,398 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>浅谈前端性能优化 - By 汪洋</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>浅谈前端性能优化</h1>
+<h2>演讲者：汪洋</h2>
+
+</article></section></slide>
+<slide class="slide" data-transition="circle"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>目的</h1>
+<h2>让大家了解我们是如何从前端层面针对页面加载速度进行优化的</h2>
+
+</article></section></slide>
+<slide class="slide" data-transition="zoomin"  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>为什么要进行前端性能优化</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<article>
+
+<img src="img/q.jpg" alt="">
+
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<article>
+<ul class="rollIn">
+<li><p>用户方面 </p>
+<h6>打开速度快，操作响应及时，体验友好</h6>
+</li>
+<li><p>服务器方面</p>
+<h6>减少页面请求数以及带宽，节省资源用来下片</h6>
+<img src="img/cls.png" width='386' height='69'>
+</li>
+</ul>
+
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide" data-transition="glue"  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>如何测试网站的性能</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="cover-circle"><article>
+<div class="magic-wrapper">
+<hgroup class="flexbox vleft">
+<h2>PageSpeed</h2>
+
+</hgroup><article>
+
+<img src="img/pagespeed.png" width='949' height='486'>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="cover-circle"><article>
+<div class="magic-wrapper">
+<hgroup class="flexbox vleft">
+<h2>PageSpeed Insights</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p><a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank">https://developers.google.com/speed/pagespeed/insights/</a></p>
+</blockquote>
+<img src="img/p.png" width='949' height='486'>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition="cover-circle"><article>
+<div class="magic-wrapper">
+<hgroup class="flexbox vleft">
+<h2>YSlow</h2>
+
+</hgroup><article>
+
+<img src="img/y.png" width='1920' height='525'>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem "  data-transition="cover-circle"><article>
+<div class="magic-wrapper">
+<hgroup class="flexbox vleft">
+<h2>WebPagetest</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p><a href="https://www.webpagetest.org/" target="_blank">https://www.webpagetest.org/</a></p>
+</blockquote>
+<img src="img/WebPage.png" width='1920' height='525'>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem "  data-transition="cover-circle"><article>
+<div class="magic-wrapper">
+<hgroup class="flexbox vleft">
+<h2>Network</h2>
+
+</hgroup><article>
+
+<img src="img/console.png" width='1920' height='525'>
+
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide" data-transition="move"  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>如何优化加载过慢的页面</h1>
+<ul class="bounceIn">
+<li>静态资源压缩混淆</li>
+<li>减少http请求数</li>
+<li>模块化管理</li>
+<li>http缓存</li>
+<li>图片懒加载</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>静态资源压缩混淆</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="zoomin"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>自动化工具gulp</h2>
+
+</hgroup><article>
+
+<pre><code>gulp.task(&#39;jsmin&#39;,function(){
+    return gulp.src(sourcePath+&#39;.js&#39;)
+    .pipe(uglify({
+        mangle:false,
+        compress:false
+    }))
+    .pipe(gulp.dest(targetPath));
+});
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="zoomin"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>压缩前的js文件</h2>
+
+</hgroup><article>
+
+<img src="img/before.png" alt="">
+
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition="zoomin"><article>
+<div class="magic-wrapper">
+<article>
+<h2>压缩后的js文件</h2>
+<img src="img/after.png" alt="">
+
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide" data-transition="pulse"  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>减少http请求数</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="circle"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>seajs-combo</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p>需要配合服务器的 nginx-http-concat 服务</p>
+</blockquote>
+<pre><code>location /static/css/ {
+    concat on;
+    concat_max_files 20;
+}
+
+location /static/js/ {
+    concat on;
+    concat_max_files 30;
+}
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="circle"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>合并前的js文件</h2>
+
+</hgroup><article>
+
+<p><img src="img/cbbefore.png" alt="">
+<img src="img/rebefore.png" alt=""></p>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition="circle"><article>
+<div class="magic-wrapper">
+<article>
+<h2>合并后的js文件</h2>
+<p><img src="img/cbafter.png" alt="">
+<img src="img/reafter.png" alt=""></p>
+
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>模块化管理</h1>
+<p>seajs</p>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>按需加载</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="newspaper"><article>
+<div class="magic-wrapper">
+<article>
+
+<img src="img/jz.png" alt="">
+
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="newspaper"><article>
+<div class="magic-wrapper">
+<article>
+
+<pre><code>// a.js
+define(function(require, exports) {
+
+    var doSomething = function(){
+        // xxx代码
+    }  
+
+});
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition="newspaper"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code>// b.js
+define(function(require, exports) {
+
+    // 获取模块 a 的接口
+  var a = require(&#39;./a&#39;);
+
+  // 调用模块 a 的方法
+  a.doSomething();
+
+});
+</code></pre>
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>图片懒加载</h1>
+<div class="magic"><div class="magicItem current pagedown"  data-transition="horizontal"><article>
+<div class="magic-wrapper">
+<article>
+
+<blockquote>
+<p>当访问一个页面的时候，先把img元素或是其他元素的背景图片路径替换成一张大小为1*1px图片的路径（这样就只需请求一次），只有当图片出现在浏览器的可视区域内时，才设置图片正真的路径，让图片显示出来。这就是图片懒加载。
+<img src="img/load.png" width="550" height="660" /></p>
+</blockquote>
+
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="horizontal"><article>
+<div class="magic-wrapper">
+<article>
+<img src="img/150946520643678.gif" width="100" height="100" />
+<pre><code>// html
+&lt;img src=&quot;菊花.gif&quot; data-src=&quot;xxx.jpg&quot; alt=&quot;&quot;&gt;
+
+// js
+$(&#39;xxx&#39;).live(&#39;scroll&#39;,function(){
+    var imgSrc = $(&#39;xxx&#39;).attr(&#39;data-src&#39;);    //获取图片真是路径
+    $(&#39;xxx&#39;).attr(&#39;src&#39;,imgSrc);    //设置图片路径
+})
+
+// lazy-load
+$(&#39;img&#39;).LazyLoad({
+    container: window,
+    event:&#39;scroll&#39;,
+    effect: &#39;show&#39;,
+    effectArgs: &#39;slow&#39;,
+    loadImg:&#39;loading.gif&#39;,
+    load: null,
+    offset: 0
+});
+</code></pre>
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thanks</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'vertical3d',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>
