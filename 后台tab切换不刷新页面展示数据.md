@@ -2,7 +2,11 @@ html:
 
 ```
 <ul>
-	<li><a href="/contract/coursedetail/list.json?contractId=${obj.contract.id }" class="j-ajax" rel="courseDetail"><span>课程明细</span></a></li>
+	<li>
+		<a href="/contract/coursedetail/list.json?contractId=${obj.contract.id }" class="j-ajax" rel="courseDetail">
+			<span>课程明细</span>
+		</a>
+	</li>
 </ul>
 ```
 java
@@ -25,7 +29,11 @@ public Object save(@Param("..") final CourseDetailAddForm courseDetailAddForm) {
 dialog 提交form表单 回调
 
 ```
-<form action="/contract/coursedetail/save.json" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, objectDetailed);">
+<form 
+	action="/contract/coursedetail/save.json" 
+	method="post" 
+	class="pageForm required-validate" 
+	onsubmit="return validateCallback(this, objectDetailed);">
 ```
 
 ```
